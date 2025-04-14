@@ -82,21 +82,20 @@ def login_view(request):
 
 @login_required
 def dashboard(request):
-    tasks = Task.objects.filter(user=request.user)  # Only show tasks belonging to the logged-in user
-    return render(request, 'core/dashboard.html', {'tasks': tasks})
+    tasks_to_do = Task.objects.filter(user=request.user, status='to_do')
+    tasks_in_progress = Task.objects.filter(user=request.user, status='in_progress')
+    tasks_completed = Task.objects.filter(user=request.user, status='completed')
+    
+    return render(request, 'core/dashboard.html', {
+        'tasks_to_do': tasks_to_do,
+        'tasks_in_progress': tasks_in_progress,
+        'tasks_completed': tasks_completed
+    })
 
 
 
 def redirect_to_signup(request):
     return redirect('/signup/?signup=true')
-
-
-
-
-
-
-
-
 
 
 @login_required
@@ -114,14 +113,27 @@ def create_task(request):
     return render(request, 'core/create_task.html', {'form': form})
 
 
-
-
 @login_required
-def edit_task(request, task_id):
-    # Your code for editing a task
-    pass
+def edit_task(request, pk):
+    task = get_object_or_404(Task, pk=pk, user=request.user)  # Ensure the task belongs to the logged-in user
+    
+    if request.method == 'POST':
+        form = TaskForm(request.POST, instance=task)
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard')  # Redirect back to the dashboard after editing
+    else:
+        form = TaskForm(instance=task)
+    
+    return render(request, 'core/edit_task.html', {'form': form, 'task': task})
 
+# Delete task view
 @login_required
-def delete_task(request, task_id):
-    # Your code for deleting a task
-    pass
+def delete_task(request, pk):
+    task = get_object_or_404(Task, pk=pk, user=request.user)  # Ensure the task belongs to the logged-in user
+    
+    if request.method == 'POST':
+        task.delete()
+        return redirect('dashboard')  # Redirect back to the dashboard after deletion
+    
+    return render(request, 'core/delete_task.html', {'task': task})

@@ -1,19 +1,55 @@
 {% extends 'core/base.html' %}
 {% block content %}
-<h2>Your Tasks</h2>
+<h2 class="dashboard-header">Welcome to your TaskHero Dashboard!</h2>
 
-<!-- Display a list of tasks -->
-{% for task in tasks %}
-    <div class="task">
-        <h3>{{ task.title }}</h3>
-        <p>{{ task.description }}</p>
-        <p>Due Date: {{ task.due_date }}</p>
-        <p>Status: {{ task.get_status_display }}</p>
-        <p>Priority: {{ task.get_priority_display }}</p>
-        <a href="{% url 'edit_task' task.id %}">Edit</a>
-        <a href="{% url 'delete_task' task.id %}">Delete</a>
+<div class="task-container">
+    <!-- To Do Tasks -->
+    <div class="task-column">
+        <h3>To Do</h3>
+        {% for task in tasks_to_do %}
+        <div class="task-card{% if task.due_date < today %} overdue{% endif %}">
+            <h4>{{ task.title }}</h4>
+            <p>Due: {{ task.due_date }}</p>
+            <p>Priority: <span class="priority {{ task.priority }}">{{ task.priority }}</span></p>
+            <a href="{% url 'edit_task' task.pk %}">Edit</a> |
+            <a href="{% url 'delete_task' task.pk %}">Delete</a>
+        </div>
+        {% empty %}
+        <p>No tasks to do</p>
+        {% endfor %}
     </div>
-{% endfor %}
 
-<a href="{% url 'create_task' %}">Create a New Task</a>
+    <!-- In Progress Tasks -->
+    <div class="task-column">
+        <h3>In Progress</h3>
+        {% for task in tasks_in_progress %}
+        <div class="task-card{% if task.due_date < today %} overdue{% endif %}">
+            <h4>{{ task.title }}</h4>
+            <p>Due: {{ task.due_date }}</p>
+            <p>Priority: <span class="priority {{ task.priority }}">{{ task.priority }}</span></p>
+            <a href="{% url 'edit_task' task.pk %}">Edit</a> |
+            <a href="{% url 'delete_task' task.pk %}">Delete</a>
+        </div>
+        {% empty %}
+        <p>No tasks in progress</p>
+        {% endfor %}
+    </div>
+
+    <!-- Completed Tasks -->
+    <div class="task-column">
+        <h3>Completed</h3>
+        {% for task in tasks_completed %}
+        <div class="task-card{% if task.due_date < today %} overdue{% endif %}">
+            <h4>{{ task.title }}</h4>
+            <p>Due: {{ task.due_date }}</p>
+            <p>Priority: <span class="priority {{ task.priority }}">{{ task.priority }}</span></p>
+            <a href="{% url 'edit_task' task.pk %}">Edit</a> |
+            <a href="{% url 'delete_task' task.pk %}">Delete</a>
+        </div>
+        {% empty %}
+        <p>No tasks completed</p>
+        {% endfor %}
+    </div>
+</div>
+
 {% endblock %}
