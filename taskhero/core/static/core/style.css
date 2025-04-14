@@ -830,3 +830,72 @@ form button:hover {
     text-decoration: underline;
   }
   
+
+
+
+
+
+
+  /* DELETE PAGE  */
+
+  /* Container holding everything */
+.confirmation-container {
+    text-align: center;
+    margin-top: 50px;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Title Styling */
+  .confirmation-title {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Styling for buttons */
+  .confirmation-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .delete-btn {
+    background-color: #e74c3c;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1.1em;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 0;
+    transition: background-color 0.3s ease;
+  }
+  
+  .delete-btn:hover {
+    background-color: #c0392b;
+  }
+  
+  .cancel-btn {
+    text-decoration: none;
+    color: white;
+    font-size: larger;
+    font-size: 1.1em;
+    display: flex;
+    align-items: center;
+    padding:  10px;
+    height: fit-content;
+    border: 1px solid #3498db;
+    background-color: #0057b3b9;
+    border-radius: 4px;
+    transition: color 0.3s ease, border-color 0.3s ease;
+  }
+  
+  .cancel-btn:hover {
+    border-color: #2980b9;
+    background-color: #0057b3fd;
+  }
+  

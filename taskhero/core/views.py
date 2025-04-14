@@ -186,3 +186,7 @@ def complete_task(request, task_id):
         task.status = 'completed'
         task.save()
     return redirect('dashboard')
+
+
+
+
