@@ -671,3 +671,99 @@ form button:hover {
 .task-column p:last-child {
     margin-bottom: 0;
 }
+
+
+
+
+
+
+
+
+/* CREATE TASK  */
+/* taskform.css */
+
+.form-container {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 40px;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-title {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .task-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 6px;
+    color: #444;
+  }
+  
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border 0.2s;
+  }
+  
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus {
+    border-color: #3f51b5;
+    outline: none;
+  }
+  
+  .error {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+  
+  .submit-btn {
+    padding: 12px;
+    background-color: #3f51b5;
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  
+  .submit-btn:hover {
+    background-color: #303f9f;
+  }
+  
+  .back-link {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    color: #3f51b5;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .back-link:hover {
+    text-decoration: underline;
+  }
+  
