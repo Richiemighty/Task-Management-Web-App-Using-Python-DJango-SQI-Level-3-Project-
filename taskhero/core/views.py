@@ -4,6 +4,8 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect
+
+
 from .forms import TaskForm, ProfilePictureForm, SignupForm
 from .models import Task, UserProfile
 from datetime import date

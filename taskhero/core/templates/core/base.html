@@ -22,7 +22,7 @@
                 {% if user.is_authenticated %}
                 <form action="{% url 'create_task'%}" method="post" class="logout-form">
                     {% csrf_token %}
-                    <button type="submit">➕ Create Task</button>
+                    <button type="submit" class="create-btn">➕ Create Task</button>
                   </form>
 
                   <div class="profile-dropdown">

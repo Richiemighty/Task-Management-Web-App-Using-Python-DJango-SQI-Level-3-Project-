@@ -1,9 +1,16 @@
 {% load static %}
 
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="{% static 'core/form_style.css' %}">
+</head>
+<body>
 
 {% block content %}
-<link rel="stylesheet" href="{% static 'core/form_style.css' %}">
 
 <!-- ✅ Display messages here -->
 {% if messages %}
@@ -17,7 +24,8 @@
 {% endif %}
 
 
-<div class="form-structor">
+<div class="form-structor" id="form-str">
+
     <div class="signup {% if request.GET.signup %}slide-up{% endif %}">
         <h2 class="form-title" id="signup"><span>or</span> Sign up</h2>
         <form method="post" action="{% url 'signup' %}">
@@ -61,6 +69,12 @@
 </div>
 
 {% endblock %}
+
+    
+</body>
+</html>
+
+
 
 <script>
     console.clear();

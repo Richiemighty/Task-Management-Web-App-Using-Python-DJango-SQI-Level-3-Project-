@@ -43,6 +43,7 @@ class TaskForm(forms.ModelForm):
     # Validate date
     def clean_due_date(self):
         due_date = self.cleaned_data.get('due_date')
+        
         if due_date < datetime.date.today():
             raise forms.ValidationError("Due date cannot be in the past.")
         return due_date

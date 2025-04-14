@@ -52,6 +52,7 @@
     <div class="form-group">
       <label for="due_date">Due Date</label>
       <input type="date" name="due_date" id="due_date" value="{{ form.due_date.value|default_if_none:'' }}">
+      
       {% if form.due_date.errors %}
         <p class="error">{{ form.due_date.errors.0 }}</p>
       {% endif %}

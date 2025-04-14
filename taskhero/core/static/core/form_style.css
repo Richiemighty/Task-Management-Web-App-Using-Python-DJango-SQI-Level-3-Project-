@@ -1,7 +1,12 @@
 
 @import url("https://fonts.googleapis.com/css?family=Fira+Sans");
 
-html,body {
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
 	position: relative;
 	min-height: 100vh;
 	background-color: #E1E8EE;
@@ -265,68 +270,4 @@ html,body {
 			-webkit-transition: all .3s ease;
 		}
 	}
-}
-
-
-.go-back {
-    margin-top: 20px;
-    text-align: center;
-}
-
-.go-back a {
-    text-decoration: none;
-    color: #007bff;
-    font-size: 14px;
-}
-
-.go-back a:hover {
-    text-decoration: underline;
-}
-
-
-
-
-
-
-/* ERROR MESSAGES */
-/* Error/Success Message Styles */
-.messages-container {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 1000;
-    width: auto;
-    max-width: 300px;
-}
-
-.alert {
-    padding: 12px 20px;
-    margin-bottom: 10px;
-    border-radius: 8px;
-    font-weight: bold;
-    color: white;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    animation: fadeIn 0.5s ease-in-out;
-}
-
-/* Message tag-based colors */
-.alert.error {
-    background-color: #e74c3c; /* red */
-}
-
-.alert.success {
-    background-color: #2ecc71; /* green */
-}
-
-.alert.warning {
-    background-color: #f39c12; /* orange */
-}
-
-.alert.info {
-    background-color: #3498db; /* blue */
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
 }
