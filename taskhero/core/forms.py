@@ -37,7 +37,10 @@ class TaskForm(forms.ModelForm):
         model = Task
         fields = ['title', 'description', 'due_date', 'status', 'priority']
         
-    # Optionally, you can add custom validations for fields
+    due_date = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
+    priority = forms.ChoiceField(choices=[('low', 'Low'), ('medium', 'Medium'), ('high', 'High')])
+
+    # Validate date
     def clean_due_date(self):
         due_date = self.cleaned_data.get('due_date')
         if due_date < datetime.date.today():

@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.contrib import messages
-
+from django.shortcuts import get_object_or_404, redirect
 from .forms import TaskForm, ProfilePictureForm, SignupForm
 from .models import Task, UserProfile
 
@@ -115,25 +115,31 @@ def create_task(request):
 
     return render(request, 'core/create_task.html', {'form': form})
 
-
 @login_required
-def edit_task(request, pk):
-    task = get_object_or_404(Task, pk=pk, user=request.user)  # Ensure the task belongs to the logged-in user
+def edit_task(request, task_id):
+    task = get_object_or_404(Task, id=task_id, user=request.user)
     
     if request.method == 'POST':
         form = TaskForm(request.POST, instance=task)
         if form.is_valid():
             form.save()
-            return redirect('dashboard')  # Redirect back to the dashboard after editing
+            return redirect('dashboard')  # Redirect to the task list after updating
     else:
         form = TaskForm(instance=task)
     
     return render(request, 'core/edit_task.html', {'form': form, 'task': task})
 
+
+@login_required
+def task_list(request):
+    # logic here
+    return render(request, 'core/task_list.html', {'tasks': []})
+
+
 # Delete task view
 @login_required
-def delete_task(request, pk):
-    task = get_object_or_404(Task, pk=pk, user=request.user)  # Ensure the task belongs to the logged-in user
+def delete_task(request, task_id):
+    task = get_object_or_404(Task, id=task_id, user=request.user)  # Ensure the task belongs to the logged-in user
     
     if request.method == 'POST':
         task.delete()
@@ -160,3 +166,5 @@ def settings_view(request):
         form = ProfilePictureForm(instance=profile)
 
     return render(request, 'core/settings.html', {'form': form, 'profile': profile})
+
+
