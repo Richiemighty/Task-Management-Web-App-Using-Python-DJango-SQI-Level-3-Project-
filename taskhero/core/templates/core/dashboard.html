@@ -2,17 +2,29 @@
 {% block content %}
 
 <h2 class="dashboard-header">Welcome to your TaskHero Dashboard, {{ user.first_name|title }} {{ user.last_name|title }}!</h2>
+
 <div class="dashboard-container">
+
+    <!-- TO DO COLUMN -->
     <div class="task-column to-do-column">
         <h3>
             To Do 
             <div class="task-count">{{ tasks_to_do|length }}</div>
         </h3>
+
         {% for task in tasks_to_do %}
         <div class="task-card{% if task.due_date < today %} overdue{% endif %}">
             <h4>{{ task.title }}</h4>
             <p>Due: {{ task.due_date }}</p>
-            <span class="priority {{ task.priority }}">{{ task.priority }}</span>
+            
+            <div class="task-footer" >
+                <span class="priority {{ task.priority }}">{{ task.priority }}</span>
+                <form method="POST" action="{% url 'start_task' task.pk %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn start-btn">Start</button>
+                </form>
+            </div>
+
             <a href="{% url 'edit_task' task.pk %}">Edit</a> |
             <a href="{% url 'delete_task' task.pk %}">Delete</a>
         </div>
@@ -21,16 +33,26 @@
         {% endfor %}
     </div>
 
+    <!-- IN PROGRESS COLUMN -->
     <div class="task-column in-progress-column">
         <h3>
             In Progress
             <div class="task-count">{{ tasks_in_progress|length }}</div>
         </h3>
+
         {% for task in tasks_in_progress %}
         <div class="task-card{% if task.due_date < today %} overdue{% endif %}">
             <h4>{{ task.title }}</h4>
             <p>Due: {{ task.due_date }}</p>
-            <span class="priority {{ task.priority }}">{{ task.priority }}</span>
+
+            <div class="task-footer" >
+                <span class="priority {{ task.priority }}">{{ task.priority }}</span>
+                <form method="POST" action="{% url 'complete_task' task.pk %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn start-btn">Complete</button>
+                </form>
+            </div>
+
             <a href="{% url 'edit_task' task.pk %}">Edit</a> |
             <a href="{% url 'delete_task' task.pk %}">Delete</a>
         </div>
@@ -39,16 +61,21 @@
         {% endfor %}
     </div>
 
+    <!-- COMPLETED COLUMN -->
     <div class="task-column completed-column">
         <h3>
             Completed
             <div class="task-count">{{ tasks_completed|length }}</div>
         </h3>
+
         {% for task in tasks_completed %}
         <div class="task-card{% if task.due_date < today %} overdue{% endif %}">
             <h4>{{ task.title }}</h4>
             <p>Due: {{ task.due_date }}</p>
-            <span class="priority {{ task.priority }}">{{ task.priority }}</span>
+            <div class="task-footer" style="display: flex; align-items: center; justify-content: flex-start;">
+                <span class="priority {{ task.priority }}">{{ task.priority }}</span>
+            </div>
+
             <a href="{% url 'edit_task' task.pk %}">Edit</a> |
             <a href="{% url 'delete_task' task.pk %}">Delete</a>
         </div>
@@ -56,6 +83,7 @@
         <p>No tasks completed</p>
         {% endfor %}
     </div>
+
 </div>
 
 {% endblock %}

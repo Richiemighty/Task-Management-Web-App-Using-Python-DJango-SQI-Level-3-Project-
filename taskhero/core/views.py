@@ -168,3 +168,21 @@ def settings_view(request):
     return render(request, 'core/settings.html', {'form': form, 'profile': profile})
 
 
+
+
+
+@login_required
+def start_task(request, task_id):
+    task = get_object_or_404(Task, id=task_id, user=request.user)
+    if request.method == 'POST':
+        task.status = 'in_progress'
+        task.save()
+    return redirect('dashboard')
+
+@login_required
+def complete_task(request, task_id):
+    task = get_object_or_404(Task, id=task_id, user=request.user)
+    if request.method == 'POST':
+        task.status = 'completed'
+        task.save()
+    return redirect('dashboard')

@@ -641,12 +641,16 @@ form button:hover {
     border-color: #e53935;
     background-color: #fce4ec;
 }
-.priority-container {
+.task-footer  {
     position: absolute;
     top: 50%;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    gap: 5px;
     right: 20px;
     transform: translateY(-50%);
-    font-size: 16px;
+    font-size: 12px;
     font-weight: bold;
     text-transform: capitalize;
 }
@@ -655,11 +659,23 @@ form button:hover {
     padding: 5px 15px;
     border-radius: 5px;
     color: white;
-    position: absolute;
-    right: 9%;
-    top: 50%;
+    height: fit-content;
 }
 
+.task-footer4 {
+    position: absolute;
+    display: flex;
+    gap: 5px;
+    height: 60px;
+    align-items: center;
+    justify-content: space-between;
+    right: 10%;
+    top: 20%;
+}
+.start-btn{
+    padding: 5px 15px;
+    margin: 0;
+}
 .priority.low {
     background-color: #4caf50; /* Green for Low priority */
 }
