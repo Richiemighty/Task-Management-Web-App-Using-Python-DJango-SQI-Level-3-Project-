@@ -1,10 +1,10 @@
 {% extends 'core/base.html' %}
 {% block content %}
-<h2 class="dashboard-header">Welcome to your TaskHero Dashboard!</h2>
 
-<div class="task-container">
-    <!-- To Do Tasks -->
-    <div class="task-column">
+
+<h2 class="dashboard-header">Welcome to your TaskHero Dashboard, {{ user.first_name|title }} {{ user.last_name|title }}!</h2>
+<div class="dashboard-container">
+    <div class="task-column to-do-column">
         <h3>To Do</h3>
         {% for task in tasks_to_do %}
         <div class="task-card{% if task.due_date < today %} overdue{% endif %}">
@@ -19,8 +19,7 @@
         {% endfor %}
     </div>
 
-    <!-- In Progress Tasks -->
-    <div class="task-column">
+    <div class="task-column in-progress-column">
         <h3>In Progress</h3>
         {% for task in tasks_in_progress %}
         <div class="task-card{% if task.due_date < today %} overdue{% endif %}">
@@ -35,8 +34,7 @@
         {% endfor %}
     </div>
 
-    <!-- Completed Tasks -->
-    <div class="task-column">
+    <div class="task-column completed-column">
         <h3>Completed</h3>
         {% for task in tasks_completed %}
         <div class="task-card{% if task.due_date < today %} overdue{% endif %}">
@@ -51,5 +49,9 @@
         {% endfor %}
     </div>
 </div>
-
 {% endblock %}
+
+
+
+
+

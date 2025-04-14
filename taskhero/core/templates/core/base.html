@@ -16,28 +16,64 @@
             <div class="logo">Task<span>Hero</span></div>
             <div class="nav-links">
                 {% if user.is_authenticated %}
-                    <!-- Logout form using POST method -->
-                    <form action="{% url 'logout' %}" method="post" class="logout-form">
+                <form action="{% url 'create_task'%}" method="post" class="logout-form">
+                    {% csrf_token %}
+                    <button type="submit">➕ Create Task</button>
+                  </form>
+
+                  <div class="profile-dropdown">
+                    <div class="profile-toggle" onclick="toggleDropdown()">
+                        {% if user.profile.profile_picture %}
+                            <img src="{{ user.profile.profile_picture.url }}" alt="Profile Picture" class="profile-img">
+                        {% else %}
+                            <img src="{% static 'core/images/reminder2.jpeg' %}" alt="Default Profile Picture" class="profile-img">
+                        {% endif %}
+                        <span class="profile-name">{{ user.first_name|title }}</span>
+                        <span class="dropdown-icon">▼</span>
+                    </div>
+                    <div id="dropdown-menu" class="dropdown-menu">
+                      <a href="{% url 'create_task' %}">➕ Create Task</a>
+                      <a href="{% url 'settings' %}">⚙️ Settings</a>
+                      <form action="{% url 'logout' %}" method="post">
                         {% csrf_token %}
-                        <button type="submit">Log Out</button>
-                    </form>
+                        <button type="submit">🚪 Log Out</button>
+                      </form>
+                    </div>
+                  </div>
                 {% else %}
-                    <!-- Login and Sign up forms -->
-                    <form action="{% url 'signup'%}?login=true" method="post" class="logout-form">
-                        {% csrf_token %}
-                        <button type="submit">Sign Up</button>
-                    </form>
-    
-                    <form action="{% url 'signup' %}?signup=true" method="post" class="logout-form">
-                        {% csrf_token %}
-                        <button type="submit">Log In</button>
-                    </form>
+                  <form action="{% url 'signup'%}?login=true" method="post" class="logout-form">
+                    {% csrf_token %}
+                    <button type="submit">Sign Up</button>
+                  </form>
+                  <form action="{% url 'signup' %}?signup=true" method="post" class="logout-form">
+                    {% csrf_token %}
+                    <button type="submit">Log In</button>
+                  </form>
                 {% endif %}
             </div>
-        </div>
-    </nav>
+              
+        </nav>
     <div class="content">
         {% block content %}{% endblock %}
     </div>
 </body>
 </html>
+
+
+
+<script>
+    function toggleDropdown() {
+      const menu = document.getElementById('dropdown-menu');
+      menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    }
+  
+    // Optional: Close dropdown if clicked outside
+    document.addEventListener('click', function (event) {
+      const dropdown = document.getElementById('dropdown-menu');
+      const toggle = document.querySelector('.profile-toggle');
+      if (!toggle.contains(event.target)) {
+        dropdown.style.display = 'none';
+      }
+    });
+  </script>
+  

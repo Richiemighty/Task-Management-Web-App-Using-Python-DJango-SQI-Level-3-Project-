@@ -1,0 +1,42 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block content %}
+
+<h2>Settings</h2>
+<div class="settings-container">
+  <div class="profile-section">
+    <img src="{{ profile.profile_picture.url }}" alt="Profile Picture" class="profile-img-large">
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-primary">Upload</button>
+    </form>
+  </div>
+</div>
+
+<style>
+  .settings-container {
+    padding: 20px;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .profile-img-large {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+  }
+
+  .btn-primary {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+</style>
+
+{% endblock %}

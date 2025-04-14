@@ -1,10 +1,52 @@
 {% extends 'core/base.html' %}
 {% block content %}
+
+
+
 <h2>Create a New Task</h2>
 
-<form method="POST">
+
+<form method="POST" action="{% url 'create_task' %}">
     {% csrf_token %}
-    {{ form.as_p }}  <!-- Render form fields as paragraph elements -->
+    
+    <label for="title">Title</label>
+    <input type="text" name="title" id="title" value="{{ form.title.value }}" required>
+    {% if form.title.errors %}
+        <p class="error">{{ form.title.errors.0 }}</p>
+    {% endif %}
+
+    <label for="description">Description</label>
+    <textarea name="description" id="description">{{ form.description.value }}</textarea>
+    {% if form.description.errors %}
+        <p class="error">{{ form.description.errors.0 }}</p>
+    {% endif %}
+
+    <label for="status">Status</label>
+    <select name="status" id="status" required>
+        {% for value, label in form.fields.status.choices %}
+            <option value="{{ value }}" {% if form.status.value == value %}selected{% endif %}>{{ label }}</option>
+        {% endfor %}
+    </select>
+    {% if form.status.errors %}
+        <p class="error">{{ form.status.errors.0 }}</p>
+    {% endif %}
+
+    <label for="priority">Priority</label>
+    <select name="priority" id="priority" required>
+        {% for value, label in form.fields.priority.choices %}
+            <option value="{{ value }}" {% if form.priority.value == value %}selected{% endif %}>{{ label }}</option>
+        {% endfor %}
+    </select>
+    {% if form.priority.errors %}
+        <p class="error">{{ form.priority.errors.0 }}</p>
+    {% endif %}
+
+    <label for="due_date">Due Date</label>
+    <input type="date" name="due_date" id="due_date" value="{{ form.due_date.value|default_if_none:'' }}">
+    {% if form.due_date.errors %}
+        <p class="error">{{ form.due_date.errors.0 }}</p>
+    {% endif %}
+
     <button type="submit">Create Task</button>
 </form>
 

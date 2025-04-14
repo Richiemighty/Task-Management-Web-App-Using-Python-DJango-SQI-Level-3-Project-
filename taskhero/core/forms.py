@@ -6,6 +6,9 @@ from .models import Task
 
 from django import forms
 from .models import CustomUser
+from .models import UserProfile
+import datetime
+
 
 class SignupForm(forms.ModelForm):
     password1 = forms.CharField(widget=forms.PasswordInput(), label="Password")
@@ -40,3 +43,14 @@ class TaskForm(forms.ModelForm):
         if due_date < datetime.date.today():
             raise forms.ValidationError("Due date cannot be in the past.")
         return due_date
+
+
+
+
+class ProfilePictureForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ['profile_picture']
+        widgets = {
+            'profile_picture': forms.FileInput(attrs={'class': 'form-control'})
+        }

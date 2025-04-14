@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .forms import SignupForm
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.contrib import messages
-from .forms import TaskForm
-from .models import Task
+
+from .forms import TaskForm, ProfilePictureForm, SignupForm
+from .models import Task, UserProfile
+
 
 
 
@@ -82,6 +83,7 @@ def login_view(request):
 
 @login_required
 def dashboard(request):
+    profile = UserProfile.objects.get(user=request.user)
     tasks_to_do = Task.objects.filter(user=request.user, status='to_do')
     tasks_in_progress = Task.objects.filter(user=request.user, status='in_progress')
     tasks_completed = Task.objects.filter(user=request.user, status='completed')
@@ -89,7 +91,8 @@ def dashboard(request):
     return render(request, 'core/dashboard.html', {
         'tasks_to_do': tasks_to_do,
         'tasks_in_progress': tasks_in_progress,
-        'tasks_completed': tasks_completed
+        'tasks_completed': tasks_completed,
+        'profile': profile
     })
 
 
@@ -137,3 +140,23 @@ def delete_task(request, pk):
         return redirect('dashboard')  # Redirect back to the dashboard after deletion
     
     return render(request, 'core/delete_task.html', {'task': task})
+
+
+
+
+
+
+
+@login_required
+def settings_view(request):
+    profile, created = UserProfile.objects.get_or_create(user=request.user)
+
+    if request.method == 'POST':
+        form = ProfilePictureForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('settings')
+    else:
+        form = ProfilePictureForm(instance=profile)
+
+    return render(request, 'core/settings.html', {'form': form, 'profile': profile})

@@ -14,6 +14,6 @@ urlpatterns = [
     path('create-task/', views.create_task, name='create_task'),  # Create task page
     path('task/edit/<int:pk>/', views.edit_task, name='edit_task'),
     path('task/delete/<int:pk>/', views.delete_task, name='delete_task'),
+    path('settings/', views.settings_view, name='settings'),
 
-
-]
+] 
