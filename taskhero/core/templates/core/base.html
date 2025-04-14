@@ -8,13 +8,32 @@
     <title>TaskHero</title>
     <link rel="stylesheet" href="{% static 'core/style.css' %}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 </head>
 <body>
     <nav class="navbar">
-        <div class="logo">TaskHero</div>
-        <div class="nav-links">
-            <a href="{% url 'signup' %}">Sign Up</a>
-            <a href="{% url 'login' %}">Log In</a>
+        <div class="container">
+            <div class="logo">Task<span>Hero</span></div>
+            <div class="nav-links">
+                {% if user.is_authenticated %}
+                    <!-- Logout form using POST method -->
+                    <form action="{% url 'logout' %}" method="post" class="logout-form">
+                        {% csrf_token %}
+                        <button type="submit">Log Out</button>
+                    </form>
+                {% else %}
+                    <!-- Login and Sign up forms -->
+                    <form action="{% url 'signup'%}?login=true" method="post" class="logout-form">
+                        {% csrf_token %}
+                        <button type="submit">Sign Up</button>
+                    </form>
+    
+                    <form action="{% url 'signup' %}?signup=true" method="post" class="logout-form">
+                        {% csrf_token %}
+                        <button type="submit">Log In</button>
+                    </form>
+                {% endif %}
+            </div>
         </div>
     </nav>
     <div class="content">

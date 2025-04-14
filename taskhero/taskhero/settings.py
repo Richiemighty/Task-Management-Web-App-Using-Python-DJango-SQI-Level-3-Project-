@@ -123,3 +123,8 @@ STATICFILES_DIRS = [BASE_DIR / "core" / "static"]
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+LOGIN_URL = '/signup/'  # or reverse_lazy('login') if using reverse
+LOGIN_REDIRECT_URL = 'dashboard'
+LOGOUT_REDIRECT_URL = '/'

@@ -1,9 +1,85 @@
 {% extends 'core/base.html' %}
+{% load static %}
 
 {% block content %}
-<section class="hero">
-    <h1>Welcome to TaskHero!</h1>
-    <p>Manage your tasks efficiently with our simple and intuitive tool. Sign up today and become a productivity superhero.</p>
-    <a href="{% url 'signup' %}" class="cta-button">Get Started</a>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+<div class="landing-hero">
+    <div class="hero-overlay">
+        <div class="hero-text animate__animated animate__fadeInDown">
+            <h1>Welcome to <span>TaskHero</span></h1>
+            <p>Master your productivity, one task at a time. TaskHero helps you stay organized, focused, and efficient — all in one place.</p>
+            <div class="hero-buttons">
+                <!-- Pass a query parameter to show Sign Up form by default -->
+                <a href="{% url 'signup' %}?login=true" class="btn-hero btn-glow">Get Started</a>
+                <!-- Pass a query parameter to show Log In form by default -->
+                <a href="{% url 'signup' %}?signup=true" class="btn-hero btn-outline">Log In</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="features-section animate__animated animate__fadeInUp">
+    <h2 class="section-title">Why Choose TaskHero?</h2>
+    <div class="features">
+        <div class="feature-card wow animate__fadeInLeft" data-wow-delay="0.3s">
+            <img src="{% static 'core/images/organize.png' %}" alt="Organize Tasks">
+            <h3>Organize Your Day</h3>
+            <p>Quickly create, update, and delete tasks. Stay on top of your daily goals.</p>
+        </div>
+        <div class="feature-card wow animate__fadeInUp" data-wow-delay="0.5s">
+            <img src="{% static 'core/images/reminder2.jpeg' %}" alt="Reminders">
+            <h3>Get Smart Reminders</h3>
+            <p>Never forget a task. Get timely reminders and notifications.</p>
+        </div>
+        <div class="feature-card wow animate__fadeInRight" data-wow-delay="0.7s">
+            <img src="{% static 'core/images/security.png' %}" alt="Security">
+            <h3>Secure and Private</h3>
+            <p>Your data is safe with us. Only you have access to your task dashboard.</p>
+        </div>
+    </div>
 </section>
+
+<section class="how-it-works wow animate__fadeInUp">
+    <h2 class="section-title">How It Works</h2>
+    <div class="steps">
+        <div class="step wow animate__animated animate__fadeInLeft" data-wow-delay="0.2s">
+            <span>1</span>
+            <h4>Sign Up</h4>
+            <p>Create your free TaskHero account in just a few seconds.</p>
+        </div>
+        <div class="step wow animate__animated animate__fadeInUp" data-wow-delay="0.4s">
+            <span>2</span>
+            <h4>Add Tasks</h4>
+            <p>Add, edit, and organize your tasks in a simple interface.</p>
+        </div>
+        <div class="step wow animate__animated animate__fadeInRight" data-wow-delay="0.6s">
+            <span>3</span>
+            <h4>Stay Productive</h4>
+            <p>Track your progress and crush your to-do list with ease!</p>
+        </div>
+    </div>
+</section>
+
+<section class="parallax-section">
+    <div class="parallax-content wow animate__zoomIn">
+        <h2>Built to Help You Succeed</h2>
+        <p>Join a community of achievers using TaskHero every day.</p>
+        <a href="{% url 'signup' %}?login=true" class="btn btn-primary">Sign Up Free</a>
+    </div>
+</section>
+
+<section class="cta-section animate__animated animate__zoomIn">
+    <h2>Ready to take control of your day?</h2>
+    <a href="{% url 'signup' %}?login=true" class="btn btn-primary">Join TaskHero Now</a>
+</section>
+
+<footer class="footer">
+    <p>© 2025 TaskHero. All rights reserved.</p>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+<script>
+    new WOW().init();
+</script>
 {% endblock %}
