@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect
 from .forms import TaskForm, ProfilePictureForm, SignupForm
 from .models import Task, UserProfile
+from datetime import date
 
 
 
@@ -92,7 +93,8 @@ def dashboard(request):
         'tasks_to_do': tasks_to_do,
         'tasks_in_progress': tasks_in_progress,
         'tasks_completed': tasks_completed,
-        'profile': profile
+        'profile': profile,
+        'today': date.today()  
     })
 
 

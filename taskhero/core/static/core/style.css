@@ -737,6 +737,23 @@ form button:hover {
 
 
 
+/* Overdue Label */
+.overdue-label {
+    position: absolute;
+    bottom: 10px;
+    right: 15px;
+    background-color: #e74c3c;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+
+
+
 
 
 
