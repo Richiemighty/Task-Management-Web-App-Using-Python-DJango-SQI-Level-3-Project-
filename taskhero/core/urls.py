@@ -11,4 +11,6 @@ urlpatterns = [
     path('login/', views.login_view, name='login'), 
     path('logout/', auth_views.LogoutView.as_view(next_page='landing'), name='logout'),
     path('dashboard/', views.dashboard, name='dashboard'),
+    path('create-task/', views.create_task, name='create_task'),  # Create task page
+
 ]

@@ -1,5 +1,19 @@
 {% extends 'core/base.html' %}
 {% block content %}
-<h2 style="text-align:center;">Welcome to your TaskHero Dashboard!</h2>
-<p style="text-align:center;">(Task management features will be added here.)</p>
+<h2>Your Tasks</h2>
+
+<!-- Display a list of tasks -->
+{% for task in tasks %}
+    <div class="task">
+        <h3>{{ task.title }}</h3>
+        <p>{{ task.description }}</p>
+        <p>Due Date: {{ task.due_date }}</p>
+        <p>Status: {{ task.get_status_display }}</p>
+        <p>Priority: {{ task.get_priority_display }}</p>
+        <a href="{% url 'edit_task' task.id %}">Edit</a>
+        <a href="{% url 'delete_task' task.id %}">Delete</a>
+    </div>
+{% endfor %}
+
+<a href="{% url 'create_task' %}">Create a New Task</a>
 {% endblock %}

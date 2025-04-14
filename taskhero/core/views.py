@@ -1,18 +1,17 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from .forms import SignupForm
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
+from django.contrib import messages
+from .forms import TaskForm
+from .models import Task
+
+
 
 
 def landing(request):
     return render(request, 'core/landing.html')
-
-from django.shortcuts import render, redirect
-from django.contrib.auth.models import User
-from django.contrib.auth import login
-from django.contrib import messages
-
 
 def signup_view(request):
     if request.method == 'POST':
@@ -80,9 +79,11 @@ def login_view(request):
             return redirect('/signup/?login=true')
 
 
+
 @login_required
 def dashboard(request):
-    return render(request, 'core/dashboard.html')
+    tasks = Task.objects.filter(user=request.user)  # Only show tasks belonging to the logged-in user
+    return render(request, 'core/dashboard.html', {'tasks': tasks})
 
 
 
@@ -97,10 +98,23 @@ def redirect_to_signup(request):
 
 
 
+
 @login_required
 def create_task(request):
-    # Your code for creating a task
-    pass
+    if request.method == 'POST':
+        form = TaskForm(request.POST)
+        if form.is_valid():
+            task = form.save(commit=False)
+            task.user = request.user  # Assign the task to the logged-in user
+            task.save()
+            return redirect('dashboard')  # Redirect to the dashboard after saving the task
+    else:
+        form = TaskForm()
+
+    return render(request, 'core/create_task.html', {'form': form})
+
+
+
 
 @login_required
 def edit_task(request, task_id):

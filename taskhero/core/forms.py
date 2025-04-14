@@ -2,6 +2,8 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
+from .models import Task
+
 from django import forms
 from .models import CustomUser
 
@@ -20,3 +22,21 @@ class SignupForm(forms.ModelForm):
         if password1 and password2 and password1 != password2:
             raise forms.ValidationError("Passwords do not match.")
         return password2
+
+
+
+
+
+
+
+class TaskForm(forms.ModelForm):
+    class Meta:
+        model = Task
+        fields = ['title', 'description', 'due_date', 'status', 'priority']
+        
+    # Optionally, you can add custom validations for fields
+    def clean_due_date(self):
+        due_date = self.cleaned_data.get('due_date')
+        if due_date < datetime.date.today():
+            raise forms.ValidationError("Due date cannot be in the past.")
+        return due_date
