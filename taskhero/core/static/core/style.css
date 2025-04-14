@@ -611,6 +611,7 @@ form button:hover {
     margin-bottom: 10px;
     border-left: 5px solid #ddd;
     transition: border-left-color 0.3s ease;
+    position: relative;
 }
 
 .task-card:hover {
@@ -634,27 +635,43 @@ form button:hover {
     font-size: 0.9em;
 }
 
-.priority {
-    display: inline-block;
-    padding: 4px 8px;
-    border-radius: 10px;
-    font-size: 0.8em;
+
+/* Overdue Task Styling */
+.task-card.overdue {
+    border-color: #e53935;
+    background-color: #fce4ec;
+}
+.priority-container {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    font-size: 16px;
     font-weight: bold;
+    text-transform: capitalize;
+}
+
+.priority {
+    padding: 5px 15px;
+    border-radius: 5px;
     color: white;
+    position: absolute;
+    right: 9%;
+    top: 50%;
 }
 
-.priority.High {
-    background-color: #dc3545;
+.priority.low {
+    background-color: #4caf50; /* Green for Low priority */
 }
 
-.priority.Medium {
-    background-color: #ffc107;
-    color: #333;
+.priority.medium {
+    background-color: #ff9800; /* Orange for Medium priority */
 }
 
-.priority.Low {
-    background-color: #28a745;
+.priority.high {
+    background-color: #f44336; /* Red for High priority */
 }
+
 
 .task-card a {
     color: #007bff;

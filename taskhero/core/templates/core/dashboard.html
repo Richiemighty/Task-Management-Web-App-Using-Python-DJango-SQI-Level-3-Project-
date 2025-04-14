@@ -10,7 +10,7 @@
         <div class="task-card{% if task.due_date < today %} overdue{% endif %}">
             <h4>{{ task.title }}</h4>
             <p>Due: {{ task.due_date }}</p>
-            <p>Priority: <span class="priority {{ task.priority }}">{{ task.priority }}</span></p>
+            <span class="priority {{ task.priority }}">{{ task.priority }}</span>
             <a href="{% url 'edit_task' task.pk %}">Edit</a> |
             <a href="{% url 'delete_task' task.pk %}">Delete</a>
         </div>
@@ -25,7 +25,7 @@
         <div class="task-card{% if task.due_date < today %} overdue{% endif %}">
             <h4>{{ task.title }}</h4>
             <p>Due: {{ task.due_date }}</p>
-            <p>Priority: <span class="priority {{ task.priority }}">{{ task.priority }}</span></p>
+            <span class="priority {{ task.priority }}">{{ task.priority }}</span>
             <a href="{% url 'edit_task' task.pk %}">Edit</a> |
             <a href="{% url 'delete_task' task.pk %}">Delete</a>
         </div>
@@ -40,7 +40,7 @@
         <div class="task-card{% if task.due_date < today %} overdue{% endif %}">
             <h4>{{ task.title }}</h4>
             <p>Due: {{ task.due_date }}</p>
-            <p>Priority: <span class="priority {{ task.priority }}">{{ task.priority }}</span></p>
+            <span class="priority {{ task.priority }}">{{ task.priority }}</span>
             <a href="{% url 'edit_task' task.pk %}">Edit</a> |
             <a href="{% url 'delete_task' task.pk %}">Delete</a>
         </div>
