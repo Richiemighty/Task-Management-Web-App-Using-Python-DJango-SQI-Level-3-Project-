@@ -339,7 +339,7 @@ body {
 /* Navbar styling */
 .navbar {
     background-color: #1e1e2f;
-    padding: 10px 0;
+    padding: 4px 0;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     position: sticky;
     top: 0;
@@ -374,7 +374,7 @@ body {
 
 .nav-links a,
 .logout-form button {
-    color: #fff;
+    color: #FFC107;
     text-decoration: none;
     font-weight: 500;
     font-size: 1rem;
@@ -415,6 +415,9 @@ body {
 .logout-form button:hover::after {
     width: 100%;
 }
+
+
+
 
 
 /* PROFILE DROPDOWN */
@@ -570,18 +573,63 @@ form button:hover {
     border-radius: 8px;
     transition: background-color 0.3s ease;
 }
-section {
-    margin: 0;
-    background: url('../core/images/background.avif') center center/cover no-repeat;
-    height: 100vh; /* Ensure the background covers the whole page */
-    position: relative;
-}
 
+#dashboard{
+    margin: 0;
+    position: relative;
+    height: 95vh; /* Ensure the background covers the whole page */
+    /* background: url('../core/images/dashboard\ 2.webp') center center/cover no-repeat; */
+    background: url('../core/images/dashboard.jpg') center center/cover no-repeat;
+    background-blend-mode: color-burn;    
+}
 .dashboard-header {
     margin: 0;
     padding: 10px
 }
 
+
+.dashboard-header {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 2rem;
+    font-weight: 600;
+    text-align: center;
+    color: #FFC107; /* slate-800 */
+    margin: 40px 0 20px;
+    margin-top: 0;
+    position: relative;
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeSlideIn 1s ease-out forwards;
+  }
+  
+  /* Animation keyframes */
+  @keyframes fadeSlideIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Optional: add underline accent */
+  .dashboard-header::after {
+    content: '';
+    display: block;
+    width: 200px;
+    height: 4px;
+    background: linear-gradient(to right, #3b82f6, #9333ea); /* blue to purple */
+    margin: 10px auto 0;
+    border-radius: 2px;
+    animation: underlineGrow 1.2s ease-out forwards;
+    transform: scaleX(0);
+    transform-origin: center;
+  }
+  
+  @keyframes underlineGrow {
+    to {
+      transform: scaleX(1);
+    }
+  }
+  
 .task-column {
     background-color: #fff;
     border-radius: 8px;
@@ -936,7 +984,46 @@ section {
 
 
 
+.create-btn{
+    margin: 0;
+}
 
+
+
+
+
+/* STYLES FOR SEARCH */
+.search-form {
+    width: 30vw;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+}
+
+.search-form input {
+    padding: 5px 10px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    width: 65%;
+}
+
+.search-form button {
+    background-color: #007bff;
+    color: white;
+    padding: 5px 12px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    position: absolute;
+    top: 0%;
+    right: 5%;
+}
+
+.search-form button:hover {
+    background-color: #0056b3;
+}
 
 
 

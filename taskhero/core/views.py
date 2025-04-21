@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
@@ -13,9 +14,12 @@ from datetime import date
 
 
 
-
 def landing(request):
+    if request.user.is_authenticated:
+        return redirect('dashboard')  
     return render(request, 'core/landing.html')
+
+
 
 def signup_view(request):
     if request.method == 'POST':
@@ -86,7 +90,7 @@ def login_view(request):
 
 @login_required
 def dashboard(request):
-    profile = UserProfile.objects.get(user=request.user)
+    profile, created = UserProfile.objects.get_or_create(user=request.user)
     tasks_to_do = Task.objects.filter(user=request.user, status='to_do')
     tasks_in_progress = Task.objects.filter(user=request.user, status='in_progress')
     tasks_completed = Task.objects.filter(user=request.user, status='completed')
@@ -194,3 +198,16 @@ def complete_task(request, task_id):
 
 
 
+
+
+
+def search_tasks(request):
+    query = request.GET.get('q', '')
+    results = Task.objects.filter(
+        Q(title__icontains=query) | Q(description__icontains=query),
+        user=request.user
+    )
+    return render(request, 'core/search_results.html', {
+        'query': query,
+        'results': results
+    })

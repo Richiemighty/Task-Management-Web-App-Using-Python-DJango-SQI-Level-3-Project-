@@ -1,0 +1,18 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+  <h2>Search Results for "{{ query }}"</h2>
+
+  {% if results %}
+    <ul class="task-results">
+      {% for task in results %}
+        <li>
+          <strong>{{ task.title }}</strong><br>
+          <small>{{ task.description }}</small>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No tasks found matching your search.</p>
+  {% endif %}
+{% endblock %}

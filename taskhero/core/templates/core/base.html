@@ -18,12 +18,22 @@
     <nav class="navbar">
         <div class="container">
             <div class="logo">Task<span>Hero</span></div>
+
             <div class="nav-links">
+
                 {% if user.is_authenticated %}
+
+                <form action="{% url 'search_tasks' %}" method="get" class="search-form">
+                  <input type="text" name="q" placeholder="Search tasks..." required>
+                  <button type="submit">🔍</button>
+                </form>
+
+              
                 <form action="{% url 'create_task'%}" method="post" class="logout-form">
-                    {% csrf_token %}
+                    
+                  {% csrf_token %}
                     <button type="submit" class="create-btn">➕ Create Task</button>
-                  </form>
+                </form>
 
                   <div class="profile-dropdown">
                     <div class="profile-toggle" onclick="toggleDropdown()">
