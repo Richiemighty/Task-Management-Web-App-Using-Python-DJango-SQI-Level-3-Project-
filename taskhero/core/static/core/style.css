@@ -1088,4 +1088,7 @@ form button:hover {
     .nav-links .create-btn{
         display: none;
     }
+    .search-form{
+        display: none;
+    }
 }

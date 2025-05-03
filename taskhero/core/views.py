@@ -126,6 +126,10 @@ def create_task(request):
 @login_required
 def edit_task(request, task_id):
     task = get_object_or_404(Task, id=task_id, user=request.user)
+
+    if task.user != request.user:
+        return HttpResponseForbidden("You do not have permission to edit this task.")
+
     
     if request.method == 'POST':
         form = TaskForm(request.POST, instance=task)
@@ -148,7 +152,10 @@ def task_list(request):
 @login_required
 def delete_task(request, task_id):
     task = get_object_or_404(Task, id=task_id, user=request.user)  # Ensure the task belongs to the logged-in user
-    
+   
+    if task.user != request.user:
+        return HttpResponseForbidden("You do not have permission to edit this task.")
+
     if request.method == 'POST':
         task.delete()
         return redirect('dashboard')  # Redirect back to the dashboard after deletion
@@ -182,6 +189,10 @@ def settings_view(request):
 @login_required
 def start_task(request, task_id):
     task = get_object_or_404(Task, id=task_id, user=request.user)
+
+    if task.user != request.user:
+        return HttpResponseForbidden("You do not have permission to edit this task.")
+
     if request.method == 'POST':
         task.status = 'in_progress'
         task.save()
