@@ -907,6 +907,57 @@ form button:hover {
   
 
 
+/* ALERT */
+/* Container holding all messages */
+.messages-container {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    z-index: 1000;
+    width: 300px;
+}
+
+/* Common alert style */
+.alert {
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    color: #fff;
+    font-weight: 500;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    animation: slideIn 0.4s ease-out;
+}
+
+/* Animation for alerts */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(50%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Message types */
+.alert.success {
+    background-color: #28a745; /* Green */
+}
+
+.alert.error {
+    background-color: #dc3545; /* Red */
+}
+
+.alert.info {
+    background-color: #17a2b8; /* Blue */
+}
+
+.alert.warning {
+    background-color: #ffc107; /* Yellow */
+    color: #212529;
+}
+
 
 
 
