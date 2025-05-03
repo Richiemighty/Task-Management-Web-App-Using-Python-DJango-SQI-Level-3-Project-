@@ -1,0 +1,48 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="form-container">
+  <h2 class="form-title">Task Details</h2>
+
+  <div class="task-detail-group">
+    <label>Title:</label>
+    <p>{{ task.title }}</p>
+  </div>
+
+  <div class="task-detail-group">
+    <label>Description:</label>
+    <p>{{ task.description|default:"No description provided." }}</p>
+  </div>
+
+  <div class="task-detail-group">
+    <label>Status:</label>
+    <p>{{ task.get_status_display }}</p>
+  </div>
+
+  <div class="task-detail-group">
+    <label>Priority:</label>
+    <p class="priority {{ task.priority }}">{{ task.get_priority_display }}</p>
+  </div>
+
+  <div class="task-detail-group">
+    <label>Due Date:</label>
+    <p>{{ task.due_date }}</p>
+  </div>
+
+  {% if task.due_date < today %}
+    <div class="overdue-label">Overdue</div>
+  {% elif task.due_date == today %}
+    <div class="overdue-label">Last Day</div>
+  {% endif %}
+
+  <div class="task-detail-actions">
+    <a href="{% url 'edit_task' task.pk %}" class="btn edit-btn">Edit</a>
+    <a href="{% url 'delete_task' task.pk %}" class="btn delete-btn">Delete</a>
+  </div>
+
+  <a href="{% url 'dashboard' %}" class="back-link">← Back to Dashboard</a>
+</div>
+
+{% endblock %}

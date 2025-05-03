@@ -211,3 +211,10 @@ def search_tasks(request):
         'query': query,
         'results': results
     })
+
+
+@login_required
+@login_required
+def task_detail(request, task_id):
+    task = get_object_or_404(Task, id=task_id, user=request.user)  # Ensure only the task owner can view it
+    return render(request, 'core/task_detail.html', {'task': task, 'today': date.today()})

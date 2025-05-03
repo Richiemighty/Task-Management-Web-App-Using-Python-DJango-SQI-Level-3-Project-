@@ -1,7 +1,7 @@
 {% extends 'core/base.html' %}
 {% block content %}
 
-<section id = "dashboard">
+<section id="dashboard">
 
     <h2 class="dashboard-header">Welcome to your TaskHero Dashboard, {{ user.first_name|title }} {{ user.last_name|title }}!</h2>
 
@@ -15,30 +15,32 @@
             </h3>
 
             {% for task in tasks_to_do %}
-            <div class="task-card">
-                <h4>{{ task.title }}</h4>
-                <p>Due: {{ task.due_date }}</p>
+            <a href="{% url 'task_detail' task.pk %}" class="task-card-link">
+                <div class="task-card">
+                    <h4>{{ task.title }}</h4>
+                    <p>Due: {{ task.due_date }}</p>
 
-                <div class="task-footer">
-                    <span class="priority {{ task.priority }}">{{ task.priority }}</span>
-                    <form method="POST" action="{% url 'start_task' task.pk %}">
-                        {% csrf_token %}
-                        <button type="submit" class="btn start-btn">Start</button>
-                    </form>
+                    <div class="task-footer">
+                        <span class="priority {{ task.priority }}">{{ task.priority }}</span>
+                        <form method="POST" action="{% url 'start_task' task.pk %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn start-btn">Start</button>
+                        </form>
+                    </div>
+
+                    {% if task.due_date < today %}
+                    <div class="overdue-label">Overdue</div>
+                    {% endif %}
+                    {% if task.due_date == today %}
+                    <div class="overdue-label">Last Day</div>
+                    {% endif %}
+
+                    <div class="task-actions">
+                        <a href="{% url 'edit_task' task.pk %}">Edit</a> |
+                        <a href="{% url 'delete_task' task.pk %}">Delete</a>
+                    </div>
                 </div>
-
-                {% if task.due_date < today %}
-                <div class="overdue-label">Overdue</div>
-                {% endif %}
-
-                {% if task.due_date == today %}
-                <div class="overdue-label">Last Day</div>
-                {% endif %}
-
-
-                <a href="{% url 'edit_task' task.pk %}">Edit</a> |
-                <a href="{% url 'delete_task' task.pk %}">Delete</a>
-            </div>
+            </a>
             {% empty %}
             <p>No tasks to do</p>
             {% endfor %}
@@ -52,29 +54,32 @@
             </h3>
 
             {% for task in tasks_in_progress %}
-            <div class="task-card">
-                <h4>{{ task.title }}</h4>
-                <p>Due: {{ task.due_date }}</p>
+            <a href="{% url 'task_detail' task.pk %}" class="task-card-link">
+                <div class="task-card">
+                    <h4>{{ task.title }}</h4>
+                    <p>Due: {{ task.due_date }}</p>
 
-                <div class="task-footer">
-                    <span class="priority {{ task.priority }}">{{ task.priority }}</span>
-                    <form method="POST" action="{% url 'complete_task' task.pk %}">
-                        {% csrf_token %}
-                        <button type="submit" class="btn start-btn">Complete</button>
-                    </form>
+                    <div class="task-footer">
+                        <span class="priority {{ task.priority }}">{{ task.priority }}</span>
+                        <form method="POST" action="{% url 'complete_task' task.pk %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn start-btn">Complete</button>
+                        </form>
+                    </div>
+
+                    {% if task.due_date < today %}
+                    <div class="overdue-label">Overdue</div>
+                    {% endif %}
+                    {% if task.due_date == today %}
+                    <div class="overdue-label">Last Day</div>
+                    {% endif %}
+
+                    <div class="task-actions">
+                        <a href="{% url 'edit_task' task.pk %}">Edit</a> |
+                        <a href="{% url 'delete_task' task.pk %}">Delete</a>
+                    </div>
                 </div>
-
-                {% if task.due_date < today %}
-                <div class="overdue-label">Overdue</div>
-                {% endif %}
-                {% if task.due_date == today %}
-                <div class="overdue-label">Last Day</div>
-                {% endif %}
-
-
-                <a href="{% url 'edit_task' task.pk %}">Edit</a> |
-                <a href="{% url 'delete_task' task.pk %}">Delete</a>
-            </div>
+            </a>
             {% empty %}
             <p>No tasks in progress</p>
             {% endfor %}
@@ -88,24 +93,28 @@
             </h3>
 
             {% for task in tasks_completed %}
-            <div class="task-card">
-                <h4>{{ task.title }}</h4>
-                <p>Due: {{ task.due_date }}</p>
-                <div class="task-footer">
-                    <span class="priority {{ task.priority }}">{{ task.priority }}</span>
+            <a href="{% url 'task_detail' task.pk %}" class="task-card-link">
+                <div class="task-card">
+                    <h4>{{ task.title }}</h4>
+                    <p>Due: {{ task.due_date }}</p>
+
+                    <div class="task-footer">
+                        <span class="priority {{ task.priority }}">{{ task.priority }}</span>
+                    </div>
+
+                    {% if task.due_date < today %}
+                    <div class="overdue-label">Overdue</div>
+                    {% endif %}
+                    {% if task.due_date == today %}
+                    <div class="overdue-label">Last Day</div>
+                    {% endif %}
+
+                    <div class="task-actions">
+                        <a href="{% url 'edit_task' task.pk %}">Edit</a> |
+                        <a href="{% url 'delete_task' task.pk %}">Delete</a>
+                    </div>
                 </div>
-
-                {% if task.due_date < today %}
-                <div class="overdue-label">Overdue</div>
-                {% endif %}
-                {% if task.due_date == today %}
-                <div class="overdue-label">Last Day</div>
-                {% endif %}
-
-
-                <a href="{% url 'edit_task' task.pk %}">Edit</a> |
-                <a href="{% url 'delete_task' task.pk %}">Delete</a>
-            </div>
+            </a>
             {% empty %}
             <p>No tasks completed</p>
             {% endfor %}
