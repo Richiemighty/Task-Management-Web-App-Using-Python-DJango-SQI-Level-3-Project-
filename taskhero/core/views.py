@@ -81,6 +81,7 @@ def login_view(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
+#            messages.success(request, 'Login successful')
             return redirect('dashboard')
         else:
             messages.error(request, 'Invalid username or password')
@@ -122,6 +123,7 @@ def create_task(request):
         form = TaskForm()
 
     return render(request, 'core/create_task.html', {'form': form})
+
 
 @login_required
 def edit_task(request, task_id):
@@ -224,7 +226,6 @@ def search_tasks(request):
     })
 
 
-@login_required
 @login_required
 def task_detail(request, task_id):
     task = get_object_or_404(Task, id=task_id, user=request.user)  # Ensure only the task owner can view it

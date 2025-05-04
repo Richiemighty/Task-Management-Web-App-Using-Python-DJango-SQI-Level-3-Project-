@@ -39,6 +39,10 @@ class CustomUser(AbstractBaseUser):
         return self.username
 
 
+
+
+
+
 class Task(models.Model):
     STATUS_CHOICES = [
         ('to_do', 'To Do'),

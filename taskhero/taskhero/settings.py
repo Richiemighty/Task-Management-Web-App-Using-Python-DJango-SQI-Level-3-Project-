@@ -125,7 +125,7 @@ STATICFILES_DIRS = [BASE_DIR / "core" / "static"]
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
-LOGIN_URL = '/signup/'  # or reverse_lazy('login') if using reverse
+LOGIN_URL = '/signup/'  
 LOGIN_REDIRECT_URL = 'dashboard'
 LOGOUT_REDIRECT_URL = '/'
 
