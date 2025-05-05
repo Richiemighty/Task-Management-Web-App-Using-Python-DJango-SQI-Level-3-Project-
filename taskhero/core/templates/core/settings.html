@@ -6,11 +6,13 @@
 <div class="settings-container">
   <div class="profile-section">
     <img src="{{ profile.profile_picture.url }}" alt="Profile Picture" class="profile-img-large">
+    
     <form method="post" enctype="multipart/form-data">
       {% csrf_token %}
       {{ form.as_p }}
       <button type="submit" class="btn btn-primary">Upload</button>
     </form>
+    
   </div>
 </div>
 
